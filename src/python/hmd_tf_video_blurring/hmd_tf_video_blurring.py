@@ -1,4 +1,5 @@
 import logging
+import subprocess
 import sys
 import os
 import json
@@ -33,16 +34,24 @@ def do_transform(
     Returns:
         int: exit code
     """
-    for x in os.listdir(input_content_path):
-        logger.info(f"Processing input file {x}...")
-        shutil.copy(input_content_path / x, output_content_path / "sample_output.txt")
-
-    secret_path = Path("/run/secrets")
-
-    for x in os.listdir(secret_path):
-        logger.info(f"This is how to locate a secret: {x} in {secret_path}")
-
     logger.info(f"Transform_nid: {transform_nid}")
     logger.info(f"Transform_instance_context: {transform_instance_context}")
+
+    videos = os.listdir(input_content_path / "videos")
+
+    for video in videos:
+        logger.info(f"Processing: {video}")
+        retcode = subprocess.run(
+            [
+                "deface",
+                "--output",
+                f"{str(output_content_path / 'out_videos')}/{os.path.splitext(video)[0]}_anonymized{os.path.splitext(video)[-1]}",
+                str(input_content_path / "videos" / video),
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if retcode.returncode != 0:
+            raise Exception(f"Error processing {video}. {retcode.stderr}")
 
     return 0

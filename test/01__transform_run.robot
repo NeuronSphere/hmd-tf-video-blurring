@@ -1,4 +1,5 @@
 *** Settings ***
+Library           OperatingSystem
 Library           hmd_lib_robot_shared.containers_lib.ContainerLib
 Variables         tx_vars.py
 Test Setup        Test Cleanup
@@ -10,4 +11,5 @@ Test PDF Generation
 
 *** Keywords ***
 Test Cleanup
-    No Operation
+    ${files}=    List Files In Directory    ./out_videos    !.gitkeep
+    Remove Files    @{files}

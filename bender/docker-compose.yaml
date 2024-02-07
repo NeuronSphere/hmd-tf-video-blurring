@@ -1,0 +1,48 @@
+networks:
+  neuronsphere:
+    external: true
+    name: neuronsphere_default
+secrets:
+  pip_url:
+    file: /home/aburg/.pip/pip.conf
+services:
+  bender_transform:
+    container_name: bender-inst_hmd-tf-video-blurring
+    environment:
+      HMD_ACCOUNT: ''
+      HMD_CONTAINER_REGISTRY: ghcr.io/neuronsphere
+      HMD_CUSTOMER_CODE: hmdd2
+      HMD_ENVIRONMENT: local
+      HMD_HOME: /root/hmd_home
+      HMD_REGION: reg1
+      HMD_REPO_PATH: /home/aburg/hmd-public-examples/projects/hmd-tf-video-blurring/test
+      INCLUDE: null
+      PIP_CACHE_DIR: /root/pip_cache
+      PIP_CONF: /run/secrets/pip_url
+      TEST_SUITE: '*.robot'
+      TRANSFORM_INSTANCE_CONTEXT: '{"instance_name": "hmd_tf_video_blurring", "repo_name":
+        "hmd-tf-video-blurring", "version": "0.1", "deployment_id": "aaa"}'
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    image: ghcr.io/neuronsphere/hmd-tf-bender:stable
+    networks:
+    - neuronsphere
+    secrets:
+    - pip_url
+    volumes:
+    - source: /home/aburg/hmd-public-examples/projects/hmd-tf-video-blurring
+      target: /hmd_transform/input
+      type: bind
+    - source: /home/aburg/hmd-public-examples/projects/hmd-tf-video-blurring
+      target: /hmd_transform/output
+      type: bind
+    - source: /home/aburg/hmd-public-examples/projects/hmd-tf-video-blurring/test
+      target: /home/aburg/hmd-public-examples/projects/hmd-tf-video-blurring/test
+      type: bind
+    - source: /var/run/docker.sock
+      target: /var/run/docker.sock
+      type: bind
+    - source: $HMD_HOME/.cache/bender/
+      target: /root/pip_cache/
+      type: bind
+version: '3.2'

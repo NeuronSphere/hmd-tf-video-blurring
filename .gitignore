@@ -136,3 +136,8 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+test/videos/
+!test/videos/.gitkeep
+test/out_videos/*
+!test/out_videos/.gitkeep

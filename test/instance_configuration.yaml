@@ -1,0 +1,4 @@
+deployment_id: aaa
+instance_name: hmd_tf_video_blurring
+repo_name: hmd-tf-video-blurring
+version: '0.1'
