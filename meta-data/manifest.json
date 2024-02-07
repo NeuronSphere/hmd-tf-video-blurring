@@ -1,0 +1,37 @@
+{
+  "identifier": "hmd-tf-video-blurring",
+  "name": "repo_name",
+  "description": "NeuronSphere Container Transform to anonymize faces in video",
+  "project_type": {
+    "name": "Transform Image",
+    "facets": [
+      "default_repo",
+      "transform_repo"
+    ]
+  },
+  "build": {
+    "commands": [
+      [
+        "python"
+      ],
+      [
+        "docker"
+      ]
+    ]
+  },
+  "docker": {
+    "build": {
+      "context_dir": "./",
+      "install_local": true
+    }
+  },
+  "deploy": {
+    "commands": [
+      [
+        "docker"
+      ]
+    ],
+    "dependencies": {},
+    "default_configuration": {}
+  }
+}

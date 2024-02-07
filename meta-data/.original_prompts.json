@@ -1,0 +1,13 @@
+{
+  "_org": "hmd",
+  "_repo_type": "tf-",
+  "short_name": "video-blurring",
+  "project_name": "hmd-tf-video-blurring",
+  "repo_name": "hmd-tf-video-blurring",
+  "description": "NeuronSphere Container Transform to anonymize faces in video",
+  "_author": "Alex Burgoon",
+  "_author_email": "alex.burgoon@hmdlabs.io",
+  "module_name": "hmd_tf_video_blurring",
+  "_template": "/tmp/tmpw8km3xa8/hmd_cli_repo",
+  "_output_dir": "/home/aburg/hmd-public-examples/projects"
+}
